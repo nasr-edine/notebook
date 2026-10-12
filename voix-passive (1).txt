@@ -1,0 +1,21 @@
+# ===== FORMAT D'UN FICHIER DE COURS =====
+# En-tête (3 lignes, "Clé: valeur") puis une ligne "---", puis un média par ligne :
+#   type | titre affiché | lien partageable
+# Types acceptés : slides, infographie, video, audio, carte mentale,
+#                  rapport, flashcards, quiz, tableau
+# "Pour:" = à qui est destiné le cours. Un prénom (Aya), plusieurs (Aya, Heba),
+# ou "tous". Sans cette ligne, le cours est visible par tout le monde.
+# Les lignes qui commencent par # sont ignorées.
+
+Titre: La voix passive
+Matière: Français
+Pour: Aya
+Emoji: 🐊
+
+---
+flashcards | Voix passive – flashcards | https://notebooklm.google.com/REMPLACER-PAR-LE-LIEN-1
+video | Pas si passif l'alligator | https://notebooklm.google.com/REMPLACER-PAR-LE-LIEN-2
+slides | Voix passive – diaporama | https://notebooklm.google.com/REMPLACER-PAR-LE-LIEN-3
+infographie | Voix passive – infographie | https://notebooklm.google.com/REMPLACER-PAR-LE-LIEN-4
+carte mentale | Voix passive – carte mentale | https://notebooklm.google.com/REMPLACER-PAR-LE-LIEN-5
+quiz | Voix passive – quiz | https://notebooklm.google.com/REMPLACER-PAR-LE-LIEN-6
