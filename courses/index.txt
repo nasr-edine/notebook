@@ -2,3 +2,4 @@
 # Pour ajouter un cours : créer le fichier .txt dans ce dossier, puis ajouter son nom ici.
 voix-passive.txt
 les_triangles.txt
+francais_classes_grammaticales_variables_anfal.txt
