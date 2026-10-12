@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mes cours – Quêtes de révision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F2FF; --card:#FFFFFF; --ink:#1F1A4D; --muted:#6B6890; --line:#E2DEFA;
+  --brand:#5B3FF5; --brand-soft:#E9E5FF; --ok:#16A36A; --ok-soft:#DDF6EA; --gold:#FFB400;
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;
+  padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+h1,h2,h3,.fun{font-family:"Fredoka",system-ui,sans-serif;font-weight:600;letter-spacing:.2px}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.wrap{max-width:760px;margin:0 auto;padding:18px 16px 60px}
+
+/* Barre de profil */
+.top{display:flex;align-items:center;gap:12px;background:var(--card);border:2px solid var(--line);border-radius:var(--radius);padding:12px 14px;margin-bottom:18px}
+.avatar{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:26px;background:var(--brand-soft);flex:none}
+.top .who{flex:1;min-width:0}
+.top .who b{display:block;font-size:1.1rem}
+.xpbar{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:6px}
+.xpbar i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),#9B7BFF);border-radius:99px;transition:width .5s}
+.xpmeta{font-size:.8rem;color:var(--muted);margin-top:2px}
+.streak{text-align:center;font-weight:700;min-width:54px}
+.streak small{display:block;font-weight:500;color:var(--muted);font-size:.7rem}
+.linkbtn{background:none;border:0;color:var(--brand);font-weight:600;padding:6px 4px;text-decoration:underline}
+
+/* Choix du profil */
+.hello{text-align:center;margin:26px 0 22px}
+.hello h1{font-size:2rem;margin:0 0 4px}
+.hello p{margin:0;color:var(--muted)}
+.profiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.profile{background:var(--card);border:2px solid var(--line);border-radius:var(--radius);padding:22px 10px;text-align:center;transition:transform .15s,border-color .15s}
+.profile:hover{transform:translateY(-3px);border-color:var(--brand)}
+.profile .avatar{width:72px;height:72px;font-size:40px;margin:0 auto 8px}
+.profile b{font-size:1.2rem}
+.profile small{display:block;color:var(--muted)}
+
+/* Cours */
+.back{margin:0 0 10px}
+.title{font-size:1.5rem;margin:6px 0 12px}
+.courses{display:grid;gap:12px}
+.course{display:flex;gap:14px;align-items:center;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:var(--radius);padding:14px}
+.course:hover{border-color:var(--brand)}
+.course .emo{font-size:30px;width:56px;height:56px;border-radius:16px;background:var(--brand-soft);display:grid;place-items:center;flex:none}
+.course .info{flex:1;min-width:0}
+.course .info b{display:block;font-size:1.05rem}
+.course .info span{color:var(--muted);font-size:.85rem}
+.course.done{border-color:var(--ok);background:var(--ok-soft)}
+.course.done .emo{background:#fff}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:var(--ok);border-radius:99px;transition:width .4s}
+.badge-done{font-weight:700;color:var(--ok)}
+
+/* Tâches */
+.section-h{display:flex;align-items:baseline;justify-content:space-between;margin:20px 0 8px}
+.section-h h3{margin:0;font-size:1.1rem}
+.section-h span{color:var(--muted);font-size:.85rem}
+.tasks{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.task{display:flex;align-items:center;gap:12px;background:var(--card);border:2px solid var(--line);border-radius:var(--radius);padding:12px}
+.task .ico{font-size:24px;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;flex:none;background:var(--tint,#eee)}
+.task .txt{flex:1;min-width:0}
+.task .txt b{display:block;overflow-wrap:anywhere}
+.task .txt small{color:var(--muted)}
+.open{background:var(--brand);color:#fff;border:0;border-radius:12px;padding:10px 14px;font-weight:700;text-decoration:none;white-space:nowrap}
+.open:hover{filter:brightness(1.1)}
+.check{width:44px;height:44px;border-radius:50%;border:3px solid var(--line);background:#fff;font-size:22px;flex:none;display:grid;place-items:center;color:transparent;transition:all .15s}
+.check:hover{border-color:var(--ok)}
+.task.done{background:var(--ok-soft);border-color:#BDE9D3}
+.task.done .check{background:var(--ok);border-color:var(--ok);color:#fff}
+.task.done .txt b{text-decoration:line-through;text-decoration-color:#0003}
+.task.done .open{background:#fff;color:var(--brand);border:2px solid var(--line)}
+.hint{color:var(--muted);font-size:.85rem;margin:6px 0 0}
+.empty,.error{background:var(--card);border:2px dashed var(--line);border-radius:var(--radius);padding:20px;text-align:center;color:var(--muted)}
+.error{border-color:#F5B5B5;color:#9B2C2C}
+.victory{background:linear-gradient(135deg,#FFF4CC,#FFE0F0);border:2px solid var(--gold);border-radius:var(--radius);padding:16px;text-align:center;margin:14px 0}
+.victory b{font-size:1.2rem}
+
+/* Badges */
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.bdg{display:flex;align-items:center;gap:6px;background:var(--card);border:2px solid var(--line);border-radius:99px;padding:5px 12px;font-size:.85rem}
+.bdg.off{opacity:.45;filter:grayscale(1)}
+
+/* Toast + confettis */
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0));transform:translate(-50%,30px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:99px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:20;max-width:90vw;text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+.pop{position:fixed;pointer-events:none;font-size:22px;z-index:30;animation:pop 1s ease-out forwards}
+@keyframes pop{0%{transform:translate(0,0) scale(.5);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.2) rotate(var(--rot));opacity:0}}
+@media (prefers-reduced-motion:reduce){.pop{display:none}*{transition:none!important}}
+@media (max-width:480px){.task{flex-wrap:wrap}.task .txt{flex-basis:calc(100% - 110px)}.open{flex:1;text-align:center}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============ CONFIGURATION (à modifier ici si besoin) ============ */
+const USERS = [
+  { id: "aya",   nom: "Aya",   emoji: "🦊" },
+  { id: "anfal", nom: "Anfal", emoji: "🦋" },
+  { id: "heba",  nom: "Heba",  emoji: "🐬" }
+];
+const COURSES_INDEX = "courses/index.txt"; // liste des fichiers de cours
+const XP_PER_TASK = 10;     // points gagnés par média terminé
+const XP_BONUS_COURSE = 30; // bonus quand un cours est terminé
+const XP_PER_LEVEL = 50;    // points pour passer un niveau
+
+/* Types de médias : mots acceptés dans les fichiers de cours */
+const TYPES = {
+  slides:     { label: "Diaporama",    ico: "🖼️", tint: "#FFE0EC", alias: ["slide","slides","slide deck","diapo","diaporama","presentation","présentation"] },
+  infographie:{ label: "Infographie",  ico: "📊", tint: "#FFF1BF", alias: ["infographie","infographic","infographique"] },
+  video:      { label: "Vidéo",        ico: "🎬", tint: "#D8F5E8", alias: ["video","vidéo","video overview","video overview"] },
+  audio:      { label: "Audio",        ico: "🎧", tint: "#DCE8FF", alias: ["audio","audio overview","podcast"] },
+  cartemental:{ label: "Carte mentale",ico: "🧠", tint: "#EBDDFF", alias: ["carte","carte mentale","mindmap","mind map","mind-map"] },
+  rapport:    { label: "Rapport",      ico: "📄", tint: "#FFE1D6", alias: ["rapport","report","fiche","resume","résumé"] },
+  flashcards: { label: "Flashcards",   ico: "🗂️", tint: "#FFF1BF", alias: ["flashcards","flashcard","cartes","cartes memoire","cartes mémoire"] },
+  quiz:       { label: "Quiz",         ico: "❓", tint: "#D3F2F7", alias: ["quiz","qcm"] },
+  tableau:    { label: "Tableau",      ico: "📋", tint: "#DCE8FF", alias: ["tableau","data table","table","tableau de donnees","tableau de données"] },
+  autre:      { label: "Document",     ico: "📎", tint: "#ECECEC", alias: [] }
+};
+const BADGES = [
+  { id:"b1",  ico:"🌱", nom:"Premier pas",     test: s => s.tasks >= 1 },
+  { id:"b5",  ico:"🚀", nom:"En route (5)",    test: s => s.tasks >= 5 },
+  { id:"b15", ico:"🏆", nom:"Machine (15)",    test: s => s.tasks >= 15 },
+  { id:"bc1", ico:"🎓", nom:"Cours terminé",   test: s => s.courses >= 1 },
+  { id:"bc3", ico:"👑", nom:"3 cours finis",   test: s => s.courses >= 3 },
+  { id:"bs3", ico:"🔥", nom:"3 jours de suite",test: s => s.streak >= 3 }
+];
+
+/* ============ OUTILS ============ */
+const $app = document.getElementById("app");
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const norm = s => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
+const today = () => new Date().toISOString().slice(0,10);
+
+function typeKey(raw){
+  const n = norm(raw);
+  for (const [k,t] of Object.entries(TYPES)){
+    if (norm(k) === n || t.alias.some(a => norm(a) === n)) return k;
+  }
+  return "autre";
+}
+
+/* Lecture d'un fichier de cours (.txt) */
+function parseCourse(text, file){
+  const course = { file, id: file.replace(/\.txt$/i,""), titre: file, matiere: "", emoji: "📚", pour: [], items: [] };
+  let inItems = false;
+  for (let line of text.replace(/^\uFEFF/,"").split(/\r?\n/)){
+    line = line.trim();
+    if (!line || line.startsWith("#") || line.startsWith("//")) continue;
+    if (line === "---"){ inItems = true; continue; }
+    if (line.includes("|")){
+      inItems = true;
+      const parts = line.split("|").map(p => p.trim());
+      if (parts.length >= 3){
+        const url = parts.slice(2).join("|").trim();
+        if (url) course.items.push({ type: typeKey(parts[0]), titre: parts[1] || TYPES[typeKey(parts[0])].label, url });
+      }
+      continue;
+    }
+    if (!inItems){
+      const m = line.match(/^([^:]+):\s*(.*)$/);
+      if (m){
+        const k = norm(m[1]), v = m[2].trim();
+        if (k === "titre") course.titre = v;
+        else if (k === "matiere") course.matiere = v;
+        else if (k === "emoji") course.emoji = v || "📚";
+        else if (k === "pour" || k === "destinataire" || k === "destinataires" || k === "eleve" || k === "eleves"){
+          // "Pour: Aya" ou "Pour: Aya, Heba" ; vide / "tous" = visible par tous
+          course.pour = v.split(/[,;&]|\bet\b/i).map(norm).filter(n => n && !["tous","toutes","tout le monde"].includes(n));
+        }
+      }
+    }
+  }
+  return course;
+}
+
+/* ============ SAUVEGARDE (par élève, sur cet appareil) ============ */
+const store = {
+  key: u => "quetes_v1_" + u,
+  load(u){
+    try { return Object.assign({ done:{}, xp:0, streak:0, last:"", bonus:{} }, JSON.parse(localStorage.getItem(this.key(u))||"{}")); }
+    catch(e){ return { done:{}, xp:0, streak:0, last:"", bonus:{} }; }
+  },
+  save(u, d){ try { localStorage.setItem(this.key(u), JSON.stringify(d)); } catch(e){} }
+};
+
+/* ============ ÉTAT ============ */
+let state = { user:null, data:null, courses:null, course:null, error:null };
+
+async function loadCourses(){
+  if (state.courses) return state.courses;
+  const res = await fetch(COURSES_INDEX, { cache:"no-cache" });
+  if (!res.ok) throw new Error("Impossible de lire " + COURSES_INDEX);
+  const files = (await res.text()).split(/\r?\n/).map(l => l.trim()).filter(l => l && !l.startsWith("#"));
+  const list = [];
+  for (const f of files){
+    try {
+      const r = await fetch("courses/" + f, { cache:"no-cache" });
+      if (r.ok) list.push(parseCourse(await r.text(), f));
+    } catch(e){ /* on ignore un cours illisible */ }
+  }
+  state.courses = list;
+  return list;
+}
+
+/* Cours visibles par l'élève connectée (champ "Pour:" du fichier de cours) */
+function visibleCourses(){
+  if (!state.courses || !state.user) return state.courses || [];
+  const me = norm(state.user.nom);
+  return state.courses.filter(c => !c.pour.length || c.pour.includes(me));
+}
+
+function stats(){
+  const d = state.data;
+  let tasks = 0, courses = 0;
+  for (const c of visibleCourses()){
+    const done = c.items.filter(i => d.done[c.id+"::"+i.url]).length;
+    tasks += done;
+    if (c.items.length && done === c.items.length) courses++;
+  }
+  return { tasks, courses, streak: d.streak };
+}
+
+/* ============ EFFETS ============ */
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 2600);
+}
+function burst(el, big){
+  if (matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+  const r = el.getBoundingClientRect();
+  const x = r.left + r.width/2, y = r.top + r.height/2;
+  const set = big ? ["🎉","⭐","✨","🏆","🎊"] : ["⭐","✨"];
+  for (let i=0;i<(big?24:8);i++){
+    const p = document.createElement("span");
+    p.className = "pop"; p.textContent = set[i % set.length];
+    p.style.left = x+"px"; p.style.top = y+"px";
+    p.style.setProperty("--dx", (Math.random()*260-130)+"px");
+    p.style.setProperty("--dy", (Math.random()*-220-20)+"px");
+    p.style.setProperty("--rot", (Math.random()*360-180)+"deg");
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 1000);
+  }
+}
+
+/* ============ ACTIONS ============ */
+function chooseUser(id){
+  state.user = USERS.find(u => u.id === id);
+  state.data = store.load(id);
+  state.course = null;
+  render();
+}
+function logout(){ state.user = null; state.data = null; state.course = null; render(); }
+function openCourse(id){ state.course = id; render(); window.scrollTo(0,0); }
+function backToCourses(){ state.course = null; render(); }
+
+function toggleTask(courseId, index, btn){
+  const course = state.courses.find(c => c.id === courseId);
+  const item = course.items[index];
+  const key = courseId + "::" + item.url;
+  const d = state.data;
+  const before = stats();
+  const level0 = Math.floor(d.xp / XP_PER_LEVEL) + 1;
+  let big = false, msgs = [];
+
+  if (d.done[key]){
+    delete d.done[key];
+    d.xp = Math.max(0, d.xp - XP_PER_TASK);
+  } else {
+    d.done[key] = true;
+    d.xp += XP_PER_TASK;
+    msgs.push("+" + XP_PER_TASK + " points ⭐");
+    // série de jours
+    const t = today();
+    if (d.last !== t){
+      const y = new Date(Date.now() - 864e5).toISOString().slice(0,10);
+      d.streak = (d.last === y) ? d.streak + 1 : 1;
+      d.last = t;
+      if (d.streak > 1) msgs.push(d.streak + " jours de suite 🔥");
+    }
+    // cours terminé ?
+    const all = course.items.every(i => d.done[courseId+"::"+i.url]);
+    if (all && !d.bonus[courseId]){
+      d.bonus[courseId] = true; d.xp += XP_BONUS_COURSE; big = true;
+      msgs = ["Cours terminé ! +" + XP_BONUS_COURSE + " points bonus 🎉"];
+    }
+    const level1 = Math.floor(d.xp / XP_PER_LEVEL) + 1;
+    if (level1 > level0){ msgs.push("Niveau " + level1 + " !"); big = true; }
+    // nouveaux badges
+    const s = stats();
+    BADGES.forEach(b => { if (!b.test(before) && b.test(s)) { msgs.push("Badge : " + b.nom + " " + b.ico); big = true; } });
+  }
+  store.save(state.user.id, d);
+  if (msgs.length) toast(msgs.join("  ·  "));
+  if (btn && d.done[key]) burst(btn, big);
+  const y = window.scrollY;
+  render(); window.scrollTo(0, y);
+}
+
+/* ============ AFFICHAGE ============ */
+function header(){
+  const d = state.data, lvl = Math.floor(d.xp / XP_PER_LEVEL) + 1, into = d.xp % XP_PER_LEVEL;
+  return `<div class="top">
+    <div class="avatar" aria-hidden="true">${state.user.emoji}</div>
+    <div class="who"><b>${esc(state.user.nom)} · niveau ${lvl}</b>
+      <div class="xpbar" role="progressbar" aria-valuemin="0" aria-valuemax="${XP_PER_LEVEL}" aria-valuenow="${into}"><i style="width:${into/XP_PER_LEVEL*100}%"></i></div>
+      <div class="xpmeta">${d.xp} points · encore ${XP_PER_LEVEL-into} pour le niveau ${lvl+1}</div></div>
+    <div class="streak fun">🔥 ${d.streak}<small>jour${d.streak>1?"s":""}</small></div>
+    <button class="linkbtn" onclick="logout()">Changer</button>
+  </div>`;
+}
+
+function badgesHtml(){
+  const s = stats();
+  return `<div class="badges">` + BADGES.map(b => `<span class="bdg ${b.test(s)?"":"off"}" title="${esc(b.nom)}"><span>${b.ico}</span>${esc(b.nom)}</span>`).join("") + `</div>`;
+}
+
+function viewProfiles(){
+  $app.innerHTML = `
+    <div class="hello"><h1>Salut ! 👋</h1><p>Qui va réviser aujourd'hui ?</p></div>
+    <div class="profiles">` + USERS.map(u => `
+      <button class="profile" onclick="chooseUser('${u.id}')">
+        <div class="avatar" aria-hidden="true">${u.emoji}</div><b>${esc(u.nom)}</b>
+      </button>`).join("") + `</div>`;
+}
+
+function viewCourses(){
+  const d = state.data;
+  let html = header() + `<h2 class="title">Choisis ton cours</h2>`;
+  if (state.error) html += `<div class="error">${esc(state.error)}</div>`;
+  else if (!state.courses) html += `<div class="empty">Chargement des cours…</div>`;
+  else if (!visibleCourses().length) html += `<div class="empty">Aucun cours pour le moment. Reviens bientôt !</div>`;
+  else {
+    html += `<div class="courses">` + visibleCourses().map(c => {
+      const n = c.items.length, done = c.items.filter(i => d.done[c.id+"::"+i.url]).length;
+      const fin = n && done === n;
+      return `<button class="course ${fin?"done":""}" onclick="openCourse('${esc(c.id)}')">
+        <div class="emo" aria-hidden="true">${esc(c.emoji)}</div>
+        <div class="info"><b>${esc(c.titre)}</b>
+          <span>${c.matiere ? esc(c.matiere) + " · " : ""}${fin ? '<span class="badge-done">Terminé ✔</span>' : done + " / " + n + " terminés"}</span>
+          <div class="bar"><i style="width:${n?done/n*100:0}%"></i></div></div>
+      </button>`;
+    }).join("") + `</div>`;
+  }
+  html += `<div class="section-h"><h3>Mes badges</h3></div>` + (state.courses ? badgesHtml() : "");
+  $app.innerHTML = html;
+}
+
+function taskHtml(c, i, idx, done){
+  const t = TYPES[i.type];
+  return `<li class="task ${done?"done":""}" style="--tint:${t.tint}">
+    <div class="ico" aria-hidden="true">${t.ico}</div>
+    <div class="txt"><b>${esc(i.titre)}</b><small>${t.label}</small></div>
+    <a class="open" href="${esc(i.url)}" target="_blank" rel="noopener">${done?"Revoir":"Ouvrir"}</a>
+    <button class="check" aria-label="${done?"Marquer comme non terminé":"Marquer comme terminé"} : ${esc(i.titre)}" aria-pressed="${done}"
+      onclick="toggleTask('${esc(c.id)}',${idx},this)">✔</button>
+  </li>`;
+}
+
+function viewCourse(){
+  const c = visibleCourses().find(x => x.id === state.course);
+  if (!c){ backToCourses(); return; }
+  const d = state.data;
+  const todo = [], done = [];
+  c.items.forEach((i, idx) => (d.done[c.id+"::"+i.url] ? done : todo).push({ i, idx }));
+  const pct = c.items.length ? Math.round(done.length / c.items.length * 100) : 0;
+  let html = header() + `<button class="linkbtn back" onclick="backToCourses()">← Tous les cours</button>
+    <h2 class="title">${esc(c.emoji)} ${esc(c.titre)}</h2>
+    <div class="bar" aria-hidden="true"><i style="width:${pct}%"></i></div>
+    <p class="hint">${done.length} sur ${c.items.length} terminés. Ouvre un média, puis coche ✔ quand tu as fini.</p>`;
+  if (!c.items.length) html += `<div class="empty">Ce cours n'a pas encore de contenu.</div>`;
+  else if (!todo.length) html += `<div class="victory"><b class="fun">Bravo ${esc(state.user.nom)} ! 🎉</b><br>Tu as tout vu dans ce cours.</div>`;
+  if (todo.length) html += `<div class="section-h"><h3>À faire</h3><span>${todo.length} restant${todo.length>1?"s":""}</span></div>
+    <ul class="tasks">` + todo.map(x => taskHtml(c, x.i, x.idx, false)).join("") + `</ul>`;
+  if (done.length) html += `<div class="section-h"><h3>Déjà fait</h3><span>${done.length}</span></div>
+    <ul class="tasks">` + done.map(x => taskHtml(c, x.i, x.idx, true)).join("") + `</ul>`;
+  $app.innerHTML = html;
+}
+
+function render(){
+  if (!state.user) return viewProfiles();
+  if (state.course && state.courses) return viewCourse();
+  viewCourses();
+}
+
+/* Démarrage */
+render();
+loadCourses().then(() => render()).catch(e => { state.error = e.message + ". Vérifie que le dossier « courses » est bien dans le dépôt."; render(); });
+</script>
+</body>
+</html>
