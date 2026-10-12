@@ -1,3 +1,4 @@
 # Un nom de fichier par ligne (dans l'ordre d'affichage).
 # Pour ajouter un cours : créer le fichier .txt dans ce dossier, puis ajouter son nom ici.
 voix-passive.txt
+les_triangles.txt
