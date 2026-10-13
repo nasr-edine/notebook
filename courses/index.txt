@@ -4,3 +4,4 @@ voix-passive.txt
 les_triangles.txt
 francais_classes_grammaticales_variables_anfal.txt
 histoire_geo_mosquee_damas_xiie_siecle_anfal.txt
+courses/physique_chimie_composition_atome_aya.txt
