@@ -1,0 +1,15 @@
+Titre: Composition et architecture de l’atome
+Matière: Physique-Chimie
+Pour: Aya
+Emoji: ⚛️
+
+---
+
+audio | Composition de l’atome – audio | https://youtu.be/YAodPQrhBuk?si=uL8Igu5C4tZlOLrh
+video | Décoder l’atome – vidéo explicative | https://youtu.be/FUIoLiIbwIM?si=H5JF1VnHUIvpeCrw
+video | Composition de l’atome – vidéo courte | https://youtube.com/shorts/kysykyY1Qt8?feature=share
+slides | L’Architecture de l’Atome – diaporama | https://nasr-edine.github.io/notebook/ressources/L_Architecture_de_l_Atome.pdf
+infographie | Les secrets de l’atome – infographie | https://nasr-edine.github.io/notebook/ressources/Les_secrets_de_l_atome.png
+quiz | Atome – quiz niveau moyen | https://notebooklm.link.google/OjhrLX7LV8qA
+flashcards | Atome – flashcards | https://notebooklm.link.google/HcvPKJdSSHfD
+carte mentale | Atome – carte mentale | https://notebooklm.link.google/uOTQKIq2l8eS
