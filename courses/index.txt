@@ -7,3 +7,4 @@ histoire_geo_mosquee_damas_xiie_siecle_anfal.txt
 physique_chimie_composition_atome_aya.txt
 mathematiques_anatomie_triangle_anfal.txt
 francais_vassilissa_tres_belle_heba.txt
+svt_transmission_maladies_genetiques_aya.txt
