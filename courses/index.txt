@@ -9,3 +9,4 @@ mathematiques_anatomie_triangle_anfal.txt
 francais_vassilissa_tres_belle_heba.txt
 svt_transmission_maladies_genetiques_aya.txt
 francais_classes_grammaticales_variables_anfal.txt
+svt_seismes_structure_interne_terre_anfal.txt
