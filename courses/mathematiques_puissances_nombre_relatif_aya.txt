@@ -1,0 +1,14 @@
+Titre: Cours sur les puissances d'un nombre relatif
+Matière: Mathématiques
+Pour: Aya
+Emoji: 🔢
+
+---
+
+audio | Calcul des puissances – audio | https://youtu.be/GSXouM1t41w
+video | La vraie logique derrière les puissances – vidéo explicative | https://youtu.be/t7mxWgm7vR8
+slides | Guide des puissances – support de cours | https://nasr-edine.github.io/notebook/ressources/Guide_des_Puissances.pdf
+infographie | Fiche de synthèse des puissances – infographie | https://nasr-edine.github.io/notebook/ressources/Fiche_de_synth%C3%A8se_des_puissances.png
+carte mentale | Puissances – carte mentale | https://notebooklm.link.google/dIyLnPFJwmPF
+flashcard | Puissances – flashcards | https://notebooklm.link.google/pFtSd1n7vbcb
+quiz | Puissances – quiz | https://notebooklm.link.google/WlDCEAuoCaYH
