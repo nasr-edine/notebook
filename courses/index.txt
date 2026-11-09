@@ -11,3 +11,4 @@ svt_transmission_maladies_genetiques_aya.txt
 francais_classes_grammaticales_variables_anfal.txt
 svt_seismes_structure_interne_terre_anfal.txt
 mathematiques_puissances_nombre_relatif_aya.txt
+mathematiques_aire_triangle_anfal.txt
