@@ -17,3 +17,4 @@ mathematiques_puissances_ecriture_scientifique_aya.txt
 physique_chimie_matiere_masse_volume_anfal.txt
 physique_chimie_masse_volumique_aya.txt
 francais_anatomie_complot_anfal.txt
+svt_fonctionnement_appareil_digestif_anfal.txt
