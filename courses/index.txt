@@ -19,3 +19,4 @@ physique_chimie_masse_volumique_aya.txt
 francais_anatomie_complot_anfal.txt
 svt_fonctionnement_appareil_digestif_anfal.txt
 francais_grammaire_orthographe_anfal.txt
+francais_passe_simple_anfal.txt
